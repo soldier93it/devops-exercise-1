@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php-app
+  template:
+    metadata:
+      labels:
+        app: php-app
+    spec:
+      containers:
+        - name: php-app
+          imagePullPolicy: Never
+          image: soldier93it/devops-php-app:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: DB_HOST
+              value: mariadb
+            - name: DB_USER
+              value: root
+            - name: DB_PASSWORD
+              value: rootpass
+            - name: DB_NAME
+              value: testdb
